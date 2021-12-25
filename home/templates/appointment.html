@@ -1,0 +1,103 @@
+
+ {% extends 'base.html' %} 
+ {% load static %}
+
+
+ {% block appoinment %}
+
+
+
+
+
+
+
+
+<section class="appoinment section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+            <div class="mt-3">
+              <div class="feature-icon mb-3">
+                <i class="icofont-support text-lg"></i>
+              </div>
+               <span class="h3">Call for an Emergency Service!</span>
+                <h2 class="text-color mt-3">9814327222</h2>
+            </div>
+        </div>
+  
+        <div class="col-lg-8">
+             <div class="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
+              <h2 class="mb-2 title-color">Book an appoinment</h2>
+              <p class="mb-4">Mollitia dicta commodi est recusandae iste, natus eum asperiores corrupti qui velit . Iste dolorum atque similique praesentium soluta.</p>
+                 <form id="#" class="appoinment-form" method="POST" action="/submit_appointment/" enctype="multipart/form-data">
+                     {% csrf_token %}
+                      <div class="row">
+
+
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="departments" id="departments" type="text" class="form-control" placeholder="departments">
+                            </div>
+                        </div>
+
+                           <div class="col-lg-6">
+                              <div class="form-group">
+                                  <input name="name" id="name" type="text" class="form-control" placeholder="name">
+                              </div>
+                          </div>
+  
+                          <div class="col-lg-6">
+                              <div class="form-group">
+                                  <input name="email" id="email" type="email" class="form-control" placeholder="email">
+                              </div>
+                          </div>
+                           <div class="col-lg-6">
+                              <div class="form-group">
+                                  <input name="contact" id="contact" type="text" class="form-control" placeholder="contact">
+                              </div>
+                          </div>
+  
+                          <div class="col-lg-6">
+                              <div class="form-group">
+                                  <input name="address" id="address" type="address" class="form-control" placeholder="address">
+                              </div>
+                          </div>
+
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                                <select class="form-control" id="exampleFormControlSelect1" name="sex">
+                                  <option>Male</option>
+                                  <option>Female</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="Age" id="Age" type="Number" class="form-control" placeholder="Age">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="appointment_date" id="appointment_date" type="Date" class="form-control" placeholder="address">
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group-2 mb-4">
+                          <textarea name="message" id="message" class="form-control" rows="6" placeholder="Your Message"></textarea>
+                      </div>
+                      <button class="btn btn-main btn-round-full">
+                        <span class="text"> Submit</span>
+                      </button>
+                  </form>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% endblock %}

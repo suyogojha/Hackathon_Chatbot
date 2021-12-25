@@ -1,0 +1,46 @@
+
+{% load static %}
+
+    
+<script src="{% static 'plugins/jquery/jquery.js' %}"></script>
+<!-- Bootstrap 4.3.2 -->
+<script src="{% static 'plugins/bootstrap/js/popper.js' %}"></script>
+<script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/counterup/jquery.easing.js' %}"></script>
+<!-- Slick Slider -->
+<script src="{% static 'plugins/slick-carousel/slick/slick.min.js' %}"></script>
+<!-- Counterup -->
+<script src="{% static 'plugins/counterup/jquery.waypoints.min.js' %}"></script>
+
+<script src="plugins/shuffle/shuffle.min.js"></script>
+<script src="{% static 'plugins/counterup/jquery.counterup.min.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/contact.js' %}"></script>
+
+</body>
+</html>
+
+
+
+<script>
+    (function() {
+
+        $('#live-chat header').on('click', function() {
+      
+          $('.chat').slideToggle(300, 'swing');
+          $('.chat-message-counter').fadeToggle(300, 'swing');
+      
+        });
+      
+        $('.chat-close').on('click', function(e) {
+      
+          e.preventDefault();
+          $('#live-chat').fadeOut(300);
+      
+        });
+      
+      }) ();
+</script>

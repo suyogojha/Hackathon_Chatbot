@@ -1,0 +1,593 @@
+ {% extends 'base.html' %} 
+ {% load static %}
+
+
+ {% block content %}
+
+
+ <section class="banner">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-12 col-xl-7">
+				<div class="block">
+					<div class="divider mb-3"></div>
+					<span class="text-uppercase text-sm letter-spacing ">Total Health care solution</span>
+					<h1 class="mb-3 mt-3">Your most trusted health partner</h1>
+					
+					<p class="mb-4 pr-5">A repudiandae ipsam labore ipsa voluptatum quidem quae laudantium quisquam aperiam maiores sunt fugit, deserunt rem suscipit placeat.</p>
+					<div class="btn-container ">
+						{% if request.user.is_authenticated %}
+
+						{% else %}
+
+						<a href="{% url 'home:add_product' %}" class="btn btn-main-2 btn-icon btn-round-full">Make appoinment <i class="icofont-simple-right ml-2  "></i></a>
+						<a href="{% url 'home:get_tocken' %}" class="btn btn-main-2 btn-icon btn-round-full">Get Token <i class="icofont-simple-right ml-2  "></i></a>
+
+						{% endif %}
+					</div>
+				</div>
+				
+			</div>
+			{% if request.user.is_authenticated %}
+			<style>
+				@charset "utf-8";
+			/* CSS Document */
+			
+			/* ---------- GENERAL ---------- */
+			
+			body {
+			  background: #e9e9e9;
+			  color: #9a9a9a;
+			  font: 100%/1.5em "Droid Sans", sans-serif;
+			  margin: 0;
+			}
+			
+			a { text-decoration: none; }
+			
+			fieldset {
+			  border: 0;
+			  margin: 0;
+			  padding: 0;
+			}
+			
+			h4, h5 {
+			  line-height: 1.5em;
+			  margin: 0;
+			}
+			
+			hr {
+			  background: #e9e9e9;
+				border: 0;
+				-moz-box-sizing: content-box;
+				box-sizing: content-box;
+				height: 1px;
+				margin: 0;
+				min-height: 1px;
+			}
+			
+			img {
+				border: 0;
+				display: block;
+				height: auto;
+				max-width: 100%;
+			}
+			
+			input {
+			  border: 0;
+			  color: inherit;
+				font-family: inherit;
+				font-size: 100%;
+				line-height: normal;
+				margin: 0;
+			}
+			
+			p { margin: 0; }
+			
+			.clearfix { *zoom: 1; } /* For IE 6/7 */
+			.clearfix:before, .clearfix:after {
+				content: "";
+				display: table;
+			}
+			.clearfix:after { clear: both; }
+			
+			/* ---------- LIVE-CHAT ---------- */
+			
+			#live-chat {
+			  bottom: 80;
+			  font-size: 12px;
+			  right: 24px;
+			  position: absolute;
+			  width: 300px;
+			}
+			
+			#live-chat header {
+			  background: #74b0dd;
+			  border-radius: 5px 5px 0 0;
+			  color: rgb(27, 219, 85);
+			  cursor: pointer;
+			  padding: 16px 24px;
+			}
+			
+			#live-chat h4:before {
+			  background: #ff1d0c;
+			  border-radius: 50%;
+			  content: "";
+			  display: inline-block;
+			  height: 9px;
+			  margin: 0 8px 0 0;
+			  width: 9px;
+			}
+			
+			#live-chat h4 {
+			  font-size: 16px;
+			}
+			
+			#live-chat h5 {
+			  font-size: 13px;
+			}
+			
+			#live-chat form {
+			  padding: 24px;
+			}
+			
+			#live-chat input[type="text"] {
+			  border: 1px solid rgb(101, 207, 175);
+			  border-radius: 3px;
+			  padding: 8px;
+			  outline: none;
+			  width: 234px;
+			}
+			
+			.chat-message-counter {
+			  background: #e62727;
+			  border: 1px solid rgb(206, 30, 212);
+			  border-radius: 50%;
+			  display: none;
+			  font-size: 12px;
+			  font-weight: bold;
+			  height: 28px;
+			  left: 0;
+			  line-height: 28px;
+			  margin: -15px 0 0 -15px;
+			  position: absolute;
+			  text-align: center;
+			  top: 0;
+			  width: 28px;
+			}
+			
+			.chat-close {
+			  background: #1b2126;
+			  border-radius: 50%;
+			  color: #fff;
+			  display: block;
+			  float: right;
+			  font-size: 10px;
+			  height: 16px;
+			  line-height: 16px;
+			  margin: 2px 0 0 0;
+			  text-align: center;
+			  width: 16px;
+			}
+			
+			.chat {
+			  background: rgb(207, 233, 232);
+			}
+			
+			.chat-history {
+			  height: 252px;
+			  padding: 8px 24px;
+			  overflow-y: scroll;
+			}
+			
+			.chat-message {
+			  margin: 16px 0;
+			}
+			
+			.chat-message img {
+			  border-radius: 50%;
+			  float: left;
+			}
+			
+			.chat-message-content {
+			  margin-left: 56px;
+			}
+			
+			.chat-time {
+			  float: right;
+			  font-size: 10px;
+			}
+			
+			.chat-feedback {
+			  font-style: italic; 
+			  margin: 0 0 0 80px;
+			}
+			
+			</style>
+			
+			
+			</head>
+			<body>
+			
+			  <div id="live-chat">
+				
+				<header class="clearfix">
+				  
+				  <a href="#" class="chat-close">x</a>
+			
+				  <h4>{{ request.user }}</h4>
+			
+				  <span class="chat-message-counter">3</span>
+			
+				</header>
+			
+				<div class="chat">
+				  
+				  <div class="chat-history">
+					
+					<div class="chat-message clearfix">
+					  
+					  <img src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32" alt="" width="32" height="32">
+			
+					  <div class="chat-message-content clearfix">
+						
+						<span class="chat-time">13:35</span>
+			
+						<h5>{{ request.user }}</h5>
+			
+						<p><b>Doctor is offline at the moment.</b></p>
+			
+					  </div> <!-- end chat-message-content -->
+			
+					</div> <!-- end chat-message -->
+			
+					<hr>
+			
+					<div class="chat-message clearfix">
+					  
+					  <img src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32" alt="" width="32" height="32">
+			
+					  <div class="chat-message-content clearfix">
+						
+						<span class="chat-time">12:37</span>
+			
+						<h5>{{ request.user }}</h5>
+			
+						<p><b>Your appointment has been confirmed through registration with token No 205 (12/16/2021, 3 P.M.)   Kindly Visit the hospital on time. Thank You</b></p>
+			
+					  </div> <!-- end chat-message-content -->
+			
+					</div> <!-- end chat-message -->
+			
+					<hr>
+			
+
+			
+					<hr>
+			
+				  </div> <!-- end chat-history -->
+			
+			
+				  <form action="#" method="post">
+			
+					<fieldset>
+					  
+					  <input type="text" placeholder="Aa" autofocus>
+					  <input type="hidden">
+			
+					</fieldset>
+			
+				  </form>
+			
+				</div> <!-- end chat -->
+
+			  </div> <!-- end live-chat -->
+				{% else %}
+									<iframe style="text-align: right;opacity: 0.75;position: fixed;bottom: 0;right: 0;z-index: 2; "
+						allow="microphone;"
+						width="350"
+						height="430"
+						src="https://console.dialogflow.com/api-client/demo/embedded/0344590d-9cc0-4180-abdd-3be3a194dbf1">
+					</iframe>
+      {% endif %}
+		</div>
+	</div>
+</section>
+
+<section class="features">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="feature-block d-lg-flex">
+					<div class="feature-item mb-5 mb-lg-0">
+						<div class="feature-icon mb-4">
+							<i class="icofont-surgeon-alt"></i>
+						</div>
+						<span>24 Hours Service</span>
+						<h4 class="mb-3">Online Appoinment</h4>
+						<p class="mb-4">Get ALl time support for emergency.We have introduced the principle of family medicine.</p>
+						<a href="{% url 'home:add_product' %}" class="btn btn-main btn-round-full">Make a appoinment</a>
+					</div>
+					
+				
+					<div class="feature-item mb-5 mb-lg-0">
+						<div class="feature-icon mb-4">
+							<i class="icofont-ui-clock"></i>
+						</div>
+						<span>Timing schedule</span>
+						<h4 class="mb-3">Working Hours</h4>
+						<ul class="w-hours list-unstyled">
+		                    <li class="d-flex justify-content-between">Sun - Wed : <span>8:00 - 17:00</span></li>
+		                    <li class="d-flex justify-content-between">Thu - Fri : <span>9:00 - 17:00</span></li>
+		                    <li class="d-flex justify-content-between">Sat - sun : <span>10:00 - 17:00</span></li>
+		                </ul>
+					</div>
+				
+					<div class="feature-item mb-5 mb-lg-0">
+						<div class="feature-icon mb-4">
+							<i class="icofont-support"></i>
+						</div>
+						<span>Emegency Cases</span>
+						<h4 class="mb-3">1-800-700-6200</h4>
+						<p>Get ALl time support for emergency.We have introduced the principle of family medicine.Get Conneted with us for any urgency .</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="section about">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-4 col-sm-6">
+				<div class="about-img">
+					<img src="{% static 'images/about/img-1.jpg' %}" alt="" class="img-fluid">
+					<img src="{% static 'images/about/img-2.jpg' %}" alt="" class="img-fluid mt-4">
+				</div>
+			</div>
+			<div class="col-lg-4 col-sm-6">
+				<div class="about-img mt-4 mt-lg-0">
+					<img src="{% static 'images/about/img-3.jpg' %}" alt="" class="img-fluid">
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="about-content pl-4 mt-4 mt-lg-0">
+					<h2 class="title-color">Personal care <br>& healthy living</h2>
+					<p class="mt-4 mb-5">We provide best leading medicle service Nulla perferendis veniam deleniti ipsum officia dolores repellat laudantium obcaecati neque.</p>
+
+					<a href="{% url 'home:service' %}" class="btn btn-main-2 btn-round-full btn-icon">Services<i class="icofont-simple-right ml-3"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="cta-section ">
+	<div class="container">
+		<div class="cta position-relative">
+			<div class="row">
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="counter-stat">
+						<i class="icofont-doctor"></i>
+						<span class="h3">58</span>k
+						<p>Happy People</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="counter-stat">
+						<i class="icofont-flag"></i>
+						<span class="h3">700</span>+
+						<p>Surgery Comepleted</p>
+					</div>
+				</div>
+				
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="counter-stat">
+						<i class="icofont-badge"></i>
+						<span class="h3">40</span>+
+						<p>Expert Doctors</p>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="counter-stat">
+						<i class="icofont-globe"></i>
+						<span class="h3">20</span>
+						<p>Worldwide Branch</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section service gray-bg">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-7 text-center">
+				<div class="section-title">
+					<h2>Award winning patient care</h2>
+					<div class="divider mx-auto my-4"></div>
+					<p>Lets know moreel necessitatibus dolor asperiores illum possimus sint voluptates incidunt molestias nostrum laudantium. Maiores porro cumque quaerat.</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="service-item mb-4">
+					<div class="icon d-flex align-items-center">
+						<i class="icofont-laboratory text-lg"></i>
+						<h4 class="mt-3 mb-3">Laboratory services</h4>
+					</div>
+
+					<div class="content">
+						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="service-item mb-4">
+					<div class="icon d-flex align-items-center">
+						<i class="icofont-heart-beat-alt text-lg"></i>
+						<h4 class="mt-3 mb-3">Heart Disease</h4>
+					</div>
+					<div class="content">
+						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="service-item mb-4">
+					<div class="icon d-flex align-items-center">
+						<i class="icofont-tooth text-lg"></i>
+						<h4 class="mt-3 mb-3">Dental Care</h4>
+					</div>
+					<div class="content">
+						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="service-item mb-4">
+					<div class="icon d-flex align-items-center">
+						<i class="icofont-crutch text-lg"></i>
+						<h4 class="mt-3 mb-3">Body Surgery</h4>
+					</div>
+
+					<div class="content">
+						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="service-item mb-4">
+					<div class="icon d-flex align-items-center">
+						<i class="icofont-brain-alt text-lg"></i>
+						<h4 class="mt-3 mb-3">Neurology Sargery</h4>
+					</div>
+					<div class="content">
+						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="service-item mb-4">
+					<div class="icon d-flex align-items-center">
+						<i class="icofont-dna-alt-1 text-lg"></i>
+						<h4 class="mt-3 mb-3">Gynecology</h4>
+					</div>
+					<div class="content">
+						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="section testimonial-2 gray-bg">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-7">
+				<div class="section-title text-center">
+					<h2>We served over 5000+ Patients</h2>
+					<div class="divider mx-auto my-4"></div>
+					<p>Lets know moreel necessitatibus dolor asperiores illum possimus sint voluptates incidunt molestias nostrum laudantium. Maiores porro cumque quaerat.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-12 testimonial-wrap-2">
+				<div class="testimonial-block style-2  gray-bg">
+					<i class="icofont-quote-right"></i>
+
+					<div class="testimonial-thumb">
+						<img src="{% static 'images/team/test-thumb1.jpg' %}" alt="" class="img-fluid">
+					</div>
+
+					<div class="client-info ">
+						<h4>Amazing service!</h4>
+						<span>John Partho</span>
+						<p>
+							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
+						</p>
+					</div>
+				</div>
+
+				<div class="testimonial-block style-2  gray-bg">
+					<div class="testimonial-thumb">
+						<img src="{% static 'images/team/test-thumb2.jpg' %}" alt="" class="img-fluid">
+					</div>
+
+					<div class="client-info">
+						<h4>Expert doctors!</h4>
+						<span>Mullar Sarth</span>
+						<p>
+							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
+						</p>
+					</div>
+					
+					<i class="icofont-quote-right"></i>
+				</div>
+
+				<div class="testimonial-block style-2  gray-bg">
+					<div class="testimonial-thumb">
+						<img src="{% static 'images/team/test-thumb3.jpg' %}" alt="" class="img-fluid">
+					</div>
+
+					<div class="client-info">
+						<h4>Good Support!</h4>
+						<span>Kolis Mullar</span>
+						<p>
+							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
+						</p>
+					</div>
+					
+					<i class="icofont-quote-right"></i>
+				</div>
+
+				<div class="testimonial-block style-2  gray-bg">
+					<div class="testimonial-thumb">
+						<img src="{% static 'images/team/test-thumb4.jpg' %}" alt="" class="img-fluid">
+					</div>
+
+					<div class="client-info">
+						<h4>Nice Environment!</h4>
+						<span>Partho Sarothi</span>
+						<p class="mt-4">
+							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
+						</p>
+					</div>
+					<i class="icofont-quote-right"></i>
+				</div>
+
+				<div class="testimonial-block style-2  gray-bg">
+					<div class="testimonial-thumb">
+						<img src="{% static 'images/team/test-thumb1.jpg' %}" alt="" class="img-fluid">
+					</div>
+
+					<div class="client-info">
+						<h4>Modern Service!</h4>
+						<span>Kolis Mullar</span>
+						<p>
+							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
+						</p>
+					</div>
+					<i class="icofont-quote-right"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+{% endblock %}

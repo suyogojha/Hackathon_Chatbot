@@ -1,0 +1,19 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+
+
+
+
+
+ {% block register %}
+<div style="margin-top:40px; border:1px solid black; padding:10px;">
+<form method="POST" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="signup">
+</form>
+</div>
+
+
+{% endblock %}
